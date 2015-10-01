@@ -5,7 +5,7 @@ import java.awt.Toolkit;
 public final class WiRED {
 	
 	public static final Toolkit tools = Toolkit.getDefaultToolkit();
-	public static final String version = "pa0.1";
+	public static final String version = "pa0.2";
 	
 	public static final GameLoop loop = new GameLoop();
 	public static final Thread thread = new Thread(loop);
