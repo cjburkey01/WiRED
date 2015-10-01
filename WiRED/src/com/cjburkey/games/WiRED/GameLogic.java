@@ -17,7 +17,9 @@ public final class GameLogic {
 		
 		for(int i = 0; i < nodeCount(); i ++) {
 			Node n = getNode(i);
-			n.tick();
+			if(n != null) {
+				n.tick();
+			}
 		}
 		
 	}
@@ -86,8 +88,10 @@ public final class GameLogic {
 	public static final void leftClick(Point pos) {
 		int x = (int) (pos.getX() / nodeSize);
 		int y = (int) (pos.getY() / nodeSize);
+		int width = (int) (Render.windowSize.getWidth() / nodeSize);
+		int height = (int) (Render.windowSize.getHeight() / nodeSize);
 		if(pos != null) {
-			if(!isNodeAt(x, y) && y > 0) {
+			if(!isNodeAt(x, y) && y > 0 && x > 0 && y < height - 1 && x < width - 1) {
 				addNode(new CableNode(x, y));
 				log("Placed node at " + x + ", " + y);
 			} else if(y == 0) {

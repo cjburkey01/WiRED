@@ -39,6 +39,13 @@ public final class DrawPane extends JPanel {
 		
 		g.setColor(Color.WHITE);
 		g.fillRect(0, 0, this.getWidth(), GameLogic.nodeSize);
+		g.fillRect(0, GameLogic.nodeSize, GameLogic.nodeSize, this.getHeight());
+		g.fillRect(this.getWidth() - GameLogic.nodeSize, GameLogic.nodeSize, GameLogic.nodeSize, this.getHeight());
+		g.fillRect(0, this.getHeight() - GameLogic.nodeSize, this.getWidth(), GameLogic.nodeSize);
+		
+		g.setColor(Color.GRAY);
+		g.drawLine(this.getWidth() - GameLogic.nodeSize, GameLogic.nodeSize, this.getWidth() - GameLogic.nodeSize, this.getHeight() - GameLogic.nodeSize);
+		g.drawLine(GameLogic.nodeSize, this.getHeight() - GameLogic.nodeSize, this.getWidth() - GameLogic.nodeSize, this.getHeight() - GameLogic.nodeSize);
 		
 		for(int i = 0; i < Render.gui.size(); i ++) {
 			GUIItem item = Render.gui.get(i);
