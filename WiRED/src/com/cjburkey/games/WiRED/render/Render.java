@@ -38,6 +38,22 @@ public final class Render {
 		return WiRED.tools.createCustomCursor(loadImg("/img/cur/" + name + ".png"), new Point(0, 0), name);
 	}
 	
+	public static final void addToolBarButton(GUIButton button) {
+		int x, width = GameLogic.nodeSize - 4;
+		if(gui.size() >= 1) {
+			x = gui.get(gui.size() - 1).x + width + 4;
+		} else {
+			x = 2;
+		}
+		
+		button.x = x;
+		button.y = 2;
+		button.width = width;
+		button.height = width;
+		
+		gui.add(button);
+	}
+	
 	public static final BufferedImage loadImg(String path) {
 		try {
 			return ImageIO.read(Render.class.getResourceAsStream(path));

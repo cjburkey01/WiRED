@@ -14,7 +14,7 @@ public final class GameLoop implements Runnable {
 			GameLogic.running = true;
 			
 			GameLogic.addNode(new PowerBlock(2, 2));
-			Render.gui.add(Render.guiResetButton);
+			Render.addToolBarButton(Render.guiResetButton);
 			
 			while(GameLogic.running) {
 				
