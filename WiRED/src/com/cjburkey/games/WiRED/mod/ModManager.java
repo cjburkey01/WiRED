@@ -8,8 +8,10 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
+import javax.swing.JOptionPane;
 import com.cjburkey.games.WiRED.GameLogic;
 import com.cjburkey.games.WiRED.WiRED;
+import com.cjburkey.games.WiRED.render.Render;
 
 public class ModManager {
 	
@@ -65,7 +67,10 @@ public class ModManager {
 		
 		if(mods.size() > 0) {
 			GameLogic.log("Running with " + mods.size() + " mods.");
-			GameLogic.msg("Mods can harm your computer\n\nCJ Burkey is not responsible for any damage caused by the usage of mods.", "Mods");
+			int val = JOptionPane.showConfirmDialog(Render.wiredFrame, "Mods can harm your computer\n\nCJ Burkey is not responsible for any damage caused by the usage of mods.\n\nDo you still want to run the game?", "Mods", JOptionPane.YES_NO_OPTION);
+			if(val == JOptionPane.NO_OPTION) {
+				System.exit(0);
+			}
 		} else {
 			GameLogic.log("No mods found.");
 		}

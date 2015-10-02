@@ -15,7 +15,7 @@ import com.cjburkey.games.WiRED.render.gui.GUIItem;
 public final class Render {
 
 	public static final Dimension screenSize = WiRED.tools.getScreenSize();
-	public static final Dimension windowSize = new Dimension(GameLogic.round(screenSize.getWidth() / 2), GameLogic.round(screenSize.getHeight() / 2));
+	public static final Dimension windowSize = new Dimension(GameLogic.round(screenSize.getWidth() - 50), GameLogic.round(screenSize.getHeight() - 100));
 
 	public static final ArrayList<GUIItem> gui = new ArrayList<GUIItem>();
 	
