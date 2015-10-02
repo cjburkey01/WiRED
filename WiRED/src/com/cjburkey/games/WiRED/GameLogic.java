@@ -3,6 +3,8 @@ package com.cjburkey.games.WiRED;
 import java.awt.Point;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import com.cjburkey.games.WiRED.mod.GameMod;
+import com.cjburkey.games.WiRED.mod.ModManager;
 import com.cjburkey.games.WiRED.obj.CableNode;
 import com.cjburkey.games.WiRED.obj.Node;
 import com.cjburkey.games.WiRED.render.Render;
@@ -13,8 +15,20 @@ public final class GameLogic {
 	public static boolean running = false;
 	public static final int nodeSize = 25;
 	
+	public static final void init() {
+		try {
+			ModManager.reloadMods();
+			
+			for(int i = 0; i < ModManager.modCount(); i ++) {
+				GameMod mod = ModManager.getMod(i);
+				mod.init();
+			}
+		} catch(Exception e) {
+			GameLogic.error(e);
+		}
+	}
+	
 	public static final void tick() {
-		
 		for(int i = 0; i < nodeCount(); i ++) {
 			Node n = getNode(i);
 			if(n != null) {
@@ -22,6 +36,10 @@ public final class GameLogic {
 			}
 		}
 		
+		for(int i = 0; i < ModManager.modCount(); i ++) {
+			GameMod mod = ModManager.getMod(i);
+			mod.tick();
+		}
 	}
 	
 	public static final void render() {
@@ -74,6 +92,10 @@ public final class GameLogic {
 			Thread.sleep(456);
 		} catch(Exception err) {  }
 		System.exit(e.hashCode());
+	}
+	
+	public static final void msg(String msg, String title) {
+		JOptionPane.showMessageDialog(Render.wiredFrame, msg, title, JOptionPane.DEFAULT_OPTION);
 	}
 	
 	public static final void quit() {

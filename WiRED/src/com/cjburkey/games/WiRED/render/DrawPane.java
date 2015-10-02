@@ -5,6 +5,8 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import javax.swing.JPanel;
 import com.cjburkey.games.WiRED.GameLogic;
+import com.cjburkey.games.WiRED.mod.GameMod;
+import com.cjburkey.games.WiRED.mod.ModManager;
 import com.cjburkey.games.WiRED.obj.Node;
 import com.cjburkey.games.WiRED.render.gui.GUIItem;
 
@@ -35,6 +37,11 @@ public final class DrawPane extends JPanel {
 		for(int i = 0; i < GameLogic.nodeCount(); i ++) {
 			Node n = GameLogic.getNode(i);
 			n.render(g);
+		}
+		
+		for(int i = 0; i < ModManager.modCount(); i ++) {
+			GameMod mod = ModManager.getMod(i);
+			mod.render(g);
 		}
 		
 		g.setColor(Color.WHITE);
