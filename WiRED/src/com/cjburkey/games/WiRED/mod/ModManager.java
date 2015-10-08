@@ -68,7 +68,7 @@ public class ModManager {
 		if(mods.size() > 0) {
 			GameLogic.log("Running with " + mods.size() + " mods.");
 			int val = JOptionPane.showConfirmDialog(Render.wiredFrame, "Mods can harm your computer\n\nCJ Burkey is not responsible for any damage caused by the usage of mods.\n\nDo you still want to run the game?", "Mods", JOptionPane.YES_NO_OPTION);
-			if(val == JOptionPane.NO_OPTION) {
+			if(val != JOptionPane.YES_OPTION) {
 				System.exit(0);
 			}
 		} else {

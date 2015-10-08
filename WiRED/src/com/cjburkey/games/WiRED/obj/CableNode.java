@@ -10,38 +10,36 @@ public class CableNode extends Node {
 		super(x, y);
 		this.powerLevel = 0;
 		this.maxPower = 255;
+		this.connectable = true;
 	}
 	
 	public void tick() {
-		
 		int power = 0;
 		
 		Node node = GameLogic.getNodeAt(this.getX() + 1, this.getY());
-		if(node != null && node.powerLevel > power) {
+		if(node != null && node.powerLevel > power && node.connectable && this.connectable) {
 			power = node.powerLevel - 1;
 		}
 		
 		node = GameLogic.getNodeAt(this.getX() - 1, this.getY());
-		if(node != null && node.powerLevel > power) {
+		if(node != null && node.powerLevel > power && node.connectable && this.connectable) {
 			power = node.powerLevel - 1;
 		}
 		
 		node = GameLogic.getNodeAt(this.getX(), this.getY() + 1);
-		if(node != null && node.powerLevel > power) {
+		if(node != null && node.powerLevel > power && node.connectable && this.connectable) {
 			power = node.powerLevel - 1;
 		}
 		
 		node = GameLogic.getNodeAt(this.getX(), this.getY() - 1);
-		if(node != null && node.powerLevel > power) {
+		if(node != null && node.powerLevel > power && node.connectable && this.connectable) {
 			power = node.powerLevel - 1;
 		}
 		
 		this.powerLevel = power;
-		
 	}
 	
 	public void render(Graphics2D g) {
-		
 		int x = this.getX() * GameLogic.nodeSize + (GameLogic.nodeSize / 4);
 		int y = this.getY() * GameLogic.nodeSize + (GameLogic.nodeSize / 4);
 		int w = GameLogic.nodeSize - (GameLogic.nodeSize / 2);
@@ -49,22 +47,25 @@ public class CableNode extends Node {
 		g.setColor(new Color(this.powerLevel, 0, 0));
 		g.fillRect(x, y, w, w);
 		
-		if(GameLogic.isNodeAt(this.getX() + 1, this.getY())) {
+		Node n = GameLogic.getNodeAt(this.getX() + 1, this.getY());
+		if(n != null && n.connectable && this.connectable) {
 			g.fillRect(x + w, y, w / 2 + 1, w);
 		}
-		
-		if(GameLogic.isNodeAt(this.getX() - 1, this.getY())) {
+
+		n = GameLogic.getNodeAt(this.getX() - 1, this.getY());
+		if(n != null && n.connectable && this.connectable) {
 			g.fillRect(x - w + w / 2, y, w / 2 + 1, w);
 		}
-		
-		if(GameLogic.isNodeAt(this.getX(), this.getY() + 1)) {
+
+		n = GameLogic.getNodeAt(this.getX(), this.getY() + 1);
+		if(n != null && n.connectable && this.connectable) {
 			g.fillRect(x, y + w, w, w / 2 + 1);
 		}
-		
-		if(GameLogic.isNodeAt(this.getX(), this.getY() - 1)) {
+
+		n = GameLogic.getNodeAt(this.getX(), this.getY() - 1);
+		if(n != null && n.connectable) {
 			g.fillRect(x, y - w + w / 2, w, w / 2 + 1);
 		}
-		
 	}
 	
 }

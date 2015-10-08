@@ -3,9 +3,10 @@ package com.cjburkey.games.WiRED;
 import java.awt.Point;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import com.cjburkey.games.WiRED.gamestate.GameState;
+import com.cjburkey.games.WiRED.gamestate.GameStateMenu;
 import com.cjburkey.games.WiRED.mod.GameMod;
 import com.cjburkey.games.WiRED.mod.ModManager;
-import com.cjburkey.games.WiRED.obj.CableNode;
 import com.cjburkey.games.WiRED.obj.Node;
 import com.cjburkey.games.WiRED.render.Render;
 
@@ -14,6 +15,7 @@ public final class GameLogic {
 	private static final ArrayList<Node> nodes = new ArrayList<Node>();
 	public static boolean running = false;
 	public static final int nodeSize = 25;
+	public static GameState state = new GameStateMenu();
 	
 	public static final void init() {
 		try {
@@ -29,23 +31,11 @@ public final class GameLogic {
 	}
 	
 	public static final void tick() {
-		for(int i = 0; i < nodeCount(); i ++) {
-			Node n = getNode(i);
-			if(n != null) {
-				n.tick();
-			}
-		}
-		
-		for(int i = 0; i < ModManager.modCount(); i ++) {
-			GameMod mod = ModManager.getMod(i);
-			mod.tick();
-		}
+		state.tick();
 	}
 	
 	public static final void render() {
-		
 		Render.drawPane.repaint();
-		
 	}
 	
 	public static final void addNode(Node n) {
@@ -108,31 +98,11 @@ public final class GameLogic {
 	}
 	
 	public static final void leftClick(Point pos) {
-		int x = (int) (pos.getX() / nodeSize);
-		int y = (int) (pos.getY() / nodeSize);
-		int width = (int) (Render.windowSize.getWidth() / nodeSize);
-		int height = (int) (Render.windowSize.getHeight() / nodeSize);
-		if(pos != null) {
-			if(!isNodeAt(x, y) && y > 0 && x > 0 && y < height - 1 && x < width - 1) {
-				addNode(new CableNode(x, y));
-				log("Placed node at " + x + ", " + y);
-			} else if(y == 0) {
-				if(Render.getItemFromPoint(pos) != null) {
-					Render.getItemFromPoint(pos).click();
-				}
-			}
-		}
+		state.leftClick(pos);
 	}
 	
 	public static final void rightClick(Point pos) {
-		int x = (int) (pos.getX() / nodeSize);
-		int y = (int) (pos.getY() / nodeSize);
-		if(pos != null) {
-			if(isNodeAt(x, y) && y > 0 && getNodeAt((int) x, y).deleteable) {
-				removeNode(getNodeAt((int) x, y));
-				log("Removed node at " + x + ", " + y);
-			}
-		}
+		state.rightClick(pos);
 	}
 	
 	public static final void reset() {

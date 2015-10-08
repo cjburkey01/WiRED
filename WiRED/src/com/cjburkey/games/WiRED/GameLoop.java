@@ -10,16 +10,15 @@ public final class GameLoop implements Runnable {
 	public void run() {
 		
 		try {
-			
 			GameLogic.running = true;
 			
 			GameLogic.addNode(new PowerBlock(3, 3));
 			Render.addToolBarButton(Render.guiResetButton);
+			Render.addToolBarButton(Render.guiHomeButton);
 			
 			GameLogic.init();
 			
 			while(GameLogic.running) {
-				
 				GameLogic.tick();
 				GameLogic.render();
 				
@@ -28,11 +27,9 @@ public final class GameLoop implements Runnable {
 				} catch(Exception e) {
 					GameLogic.error(e);
 				}
-				
 			}
 			
 			System.exit(0);
-			
 		} catch(Exception e) {
 			GameLogic.error(e);
 		}

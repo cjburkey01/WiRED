@@ -6,7 +6,7 @@ import java.io.File;
 public final class WiRED {
 	
 	public static final Toolkit tools = Toolkit.getDefaultToolkit();
-	public static final String version = "pa0.4";
+	public static final String version = "pa0.5";
 	
 	public static final GameLoop loop = new GameLoop();
 	public static final Thread thread = new Thread(loop);
@@ -16,21 +16,21 @@ public final class WiRED {
 	
 	public static final String gameLoc = userHome + fileSep + "WiRED" + fileSep;
 	public static final String modsLoc = gameLoc + "mods" + fileSep;
+	public static final String levelsLoc = gameLoc + "levels" + fileSep;
 	
 	public static void main(String[] args) {
-		
 		Handler handler = new Handler();
 		Thread.setDefaultUncaughtExceptionHandler(handler);
 		
 		new File(gameLoc).mkdirs();
 		new File(modsLoc).mkdirs();
+		new File(levelsLoc).mkdirs();
 		
 		try {
 			thread.start();
 		} catch(Exception e) {
 			GameLogic.error(e);
 		}
-		
 	}
 	
 	static final class Handler implements Thread.UncaughtExceptionHandler {

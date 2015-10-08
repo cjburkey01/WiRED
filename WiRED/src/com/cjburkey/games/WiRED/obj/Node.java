@@ -11,6 +11,7 @@ public class Node {
 	public int maxPower = 255;
 	
 	public boolean deleteable = true;
+	public boolean connectable = true;
 	
 	protected Node(int x, int y) {
 		this.x = x;

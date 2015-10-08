@@ -1,14 +1,10 @@
 package com.cjburkey.games.WiRED.render;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import javax.swing.JPanel;
 import com.cjburkey.games.WiRED.GameLogic;
-import com.cjburkey.games.WiRED.mod.GameMod;
-import com.cjburkey.games.WiRED.mod.ModManager;
-import com.cjburkey.games.WiRED.obj.Node;
-import com.cjburkey.games.WiRED.render.gui.GUIItem;
 
 public final class DrawPane extends JPanel {
 	
@@ -20,47 +16,11 @@ public final class DrawPane extends JPanel {
 	}
 	
 	public void paintComponent(Graphics gg) {
-		
 		Graphics2D g = (Graphics2D) gg;
-		
-		g.setColor(Color.WHITE);
-		g.fillRect(0, 0, this.getWidth(), this.getHeight());
-		
-		g.setColor(Color.GRAY);
-		for(int x = 0; x < this.getWidth(); x += GameLogic.nodeSize) {
-			g.drawLine(x, 0, x, this.getHeight());
-		}
-		for(int y = 0; y < this.getHeight(); y += GameLogic.nodeSize) {
-			g.drawLine(0, y, this.getWidth(), y);
-		}
-		
-		for(int i = 0; i < GameLogic.nodeCount(); i ++) {
-			Node n = GameLogic.getNode(i);
-			n.render(g);
-		}
-		
-		for(int i = 0; i < ModManager.modCount(); i ++) {
-			GameMod mod = ModManager.getMod(i);
-			mod.render(g);
-		}
-		
-		g.setColor(Color.WHITE);
-		g.fillRect(0, 0, this.getWidth(), GameLogic.nodeSize);
-		g.fillRect(0, GameLogic.nodeSize, GameLogic.nodeSize, this.getHeight());
-		g.fillRect(this.getWidth() - GameLogic.nodeSize, GameLogic.nodeSize, GameLogic.nodeSize, this.getHeight());
-		g.fillRect(0, this.getHeight() - GameLogic.nodeSize, this.getWidth(), GameLogic.nodeSize);
-		
-		g.setColor(Color.GRAY);
-		g.drawLine(this.getWidth() - GameLogic.nodeSize, GameLogic.nodeSize, this.getWidth() - GameLogic.nodeSize, this.getHeight() - GameLogic.nodeSize);
-		g.drawLine(GameLogic.nodeSize, this.getHeight() - GameLogic.nodeSize, this.getWidth() - GameLogic.nodeSize, this.getHeight() - GameLogic.nodeSize);
-		
-		for(int i = 0; i < Render.gui.size(); i ++) {
-			GUIItem item = Render.gui.get(i);
-			item.render(g);
-		}
-		
-		this.setCursor(Render.cursorPlace);
-		
+		g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+		GameLogic.state.render(g);
 	}
 	
 }

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import com.cjburkey.games.WiRED.GameLogic;
 import com.cjburkey.games.WiRED.WiRED;
+import com.cjburkey.games.WiRED.gamestate.GameStateMenu;
 import com.cjburkey.games.WiRED.render.gui.GUIButton;
 import com.cjburkey.games.WiRED.render.gui.GUIItem;
 
@@ -31,6 +32,12 @@ public final class Render {
 	public static final GUIButton guiResetButton = new GUIButton(2, 2, GameLogic.nodeSize - 4, GameLogic.nodeSize - 4, loadImg("/img/reset.png")) {
 		public void click() {
 			GameLogic.reset();
+		}
+	};
+	
+	public static final GUIButton guiHomeButton = new GUIButton(2, 2, GameLogic.nodeSize - 4, GameLogic.nodeSize - 4, loadImg("/img/menu.png")) {
+		public void click() {
+			GameLogic.state = new GameStateMenu();
 		}
 	};
 	
