@@ -6,6 +6,8 @@ import com.cjburkey.games.WiRED.GameLogic;
 
 public class PowerBlock extends Node {
 	
+	private static final long serialVersionUID = -6141911278645028968L;
+
 	public PowerBlock(int x, int y) {
 		super(x, y);
 		this.powerLevel = 255;
@@ -13,11 +15,7 @@ public class PowerBlock extends Node {
 		this.deleteable = false;
 	}
 	
-	public void tick() {
-		
-		
-		
-	}
+	public void tick() {  }
 	
 	public void render(Graphics2D g) {
 		

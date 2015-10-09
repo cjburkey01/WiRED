@@ -6,6 +6,8 @@ import com.cjburkey.games.WiRED.GameLogic;
 
 public class CableNode extends Node {
 	
+	private static final long serialVersionUID = 2373736297740427991L;
+
 	public CableNode(int x, int y) {
 		super(x, y);
 		this.powerLevel = 0;

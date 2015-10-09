@@ -54,6 +54,10 @@ public final class GameLogic {
 		return nodes.size();
 	}
 	
+	public static final ArrayList<Node> getArray() {
+		return nodes;
+	}
+	
 	public static final Node getNodeAt(int x, int y) {
 		for(int i = 0; i < nodeCount(); i ++) {
 			Node n = getNode(i);

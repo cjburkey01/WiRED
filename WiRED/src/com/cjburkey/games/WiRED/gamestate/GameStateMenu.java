@@ -22,15 +22,20 @@ public class GameStateMenu extends GameState {
 				GameLogic.log("Click");
 			}
 		};
+		
+		GUIButton loadButton = new GUIButton(0, 256, 256, 256, Render.loadImg("/img/load.png")) {
+			public void click() {
+				
+			}
+		};
 		GUILabel label = new GUILabel("TEMPORARY MENU LOL", Color.BLACK, 256, 128);
 		
 		menuItems.add(playButton);
+		menuItems.add(loadButton);
 		menuItems.add(label);
 	}
 	
-	public void tick() {
-		
-	}
+	public void tick() {  }
 	
 	public void render(Graphics2D g) {
 		for(int i = 0; i < menuItems.size(); i ++) {

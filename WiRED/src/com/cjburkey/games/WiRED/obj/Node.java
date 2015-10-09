@@ -1,8 +1,11 @@
 package com.cjburkey.games.WiRED.obj;
 
 import java.awt.Graphics2D;
+import java.io.Serializable;
 
-public class Node {
+public class Node implements Serializable {
+	
+	private static final long serialVersionUID = -4260696381927419865L;
 	
 	private int x, y;
 	private String coreName = this.getClass().getName();
